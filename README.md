@@ -44,6 +44,13 @@ The third model extended the baseline CNN by incorporating hyperparameter tuning
 # Conclusionn
 ## Limitations
 ## Next Steps
-# More Information:
-# Repository Structure: 
-AUTHOR 
+## More Information:
+Find the full analysis in the [GoogleColab] or review this [presentation]().
+
+## Repository Structure
+- Graphs
+- README.md
+- .ipynb
+- .pdf
+
+### Author: Adriana Ramirez Franco (aramirezfr20@gmail.com)
