@@ -37,8 +37,13 @@ The third model extended the baseline CNN by incorporating hyperparameter tuning
 - **Key Insights**:  
   - The hyperparameter-tuned CNN achieved the best performance among all models, with higher accuracy, precision, and recall compared to the baseline CNN.  
   - Regularization methods like dropout effectively mitigated overfitting, enabling the model to generalize better on unseen data.  
-  - Adjustments to the learning rate improved convergence, and increased filter sizes helped capture more complex features in the images.  
+  - Adjustments to the learning rate improved convergence, and increased filter sizes helped capture more complex features in the images.
+    
+# Evaluation
 
 # Conclusionn
 ## Limitations
 ## Next Steps
+# More Information:
+# Repository Structure: 
+AUTHOR 
