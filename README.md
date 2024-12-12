@@ -1,56 +1,45 @@
 # Business Understanding 
-The goal of this project is to develop a binary image classifier capable of accurately distinguishing between human faces and non-face objects, addressing a critical need in security and surveillance systems. By leveraging advanced machine learning techniques, the project aims to create a reliable model that can be seamlessly integrated into real-world applications, such as smart surveillance systems, biometric authentication, and automated monitoring. Accurate differentiation between faces and objects is essential for ensuring public safety, operational efficiency, and privacy compliance. Failure to effectively distinguish these classes can result in security risks, inefficiencies, and unnecessary resource allocation. By tackling these challenges, the project has the potential to enhance the reliability of surveillance systems, minimize errors, and contribute to the broader adoption of AI-driven technologies in security and access control.
+This project aims to develop a binary image classifier that can accurately distinguish between human faces and non-face objects. By using advanced machine learning techniques, the goal is to create a reliable model for applications like smart surveillance, biometric authentication, and automated monitoring. Accurate classification is crucial for public safety, operational efficiency, and privacy compliance. The project seeks to enhance surveillance system reliability, reduce errors, and support the broader adoption of AI in security and access control.
 
 # Data Understanding
-This project utilizes two distinct datasets: the Tiny ImageNet dataset and the Labeled Faces in the Wild (LFW) dataset. The Tiny ImageNet dataset contains 200 object classes with over 100,000 RGB training images and 10,000 validation images, all resized to 64x64 pixels. Its diversity in object types makes it highly suitable for representing non-face entities, which is essential for training a robust binary classifier. The LFW dataset, on the other hand, comprises more than 13,000 face images collected under various lighting conditions, orientations, and resolutions. Designed for face recognition tasks, it provides an extensive set of labeled face images, enabling the model to learn distinctive facial features.  
+This project uses two datasets: Tiny ImageNet and Labeled Faces in the Wild (LFW). Tiny ImageNet includes over 100,000 training images and 10,000 validation images across 200 object classes, resized to 64x64 pixels, making it ideal for non-face entities. LFW contains over 13,000 face images under various conditions, perfect for learning facial features.
 
-Combining these datasets ensures balanced representation between face and object classes, a critical factor for reducing bias and improving model performance. Features such as RGB pixel intensities capture the raw visual data necessary for distinguishing the two classes, while the variation in lighting, orientation, and object types enhances the model’s generalizability to real-world scenarios. Both datasets are well-labeled, facilitating clear distinctions for binary classification tasks. With appropriate preprocessing steps, including normalization and balancing of classes, these datasets provide a robust foundation for developing a high-performing classifier. For additional details on the datasets, refer to their Kaggle pages: [LFW Dataset](https://www.kaggle.com/datasets/jessicali9530/lfw-dataset) and [Tiny ImageNet Dataset](https://www.kaggle.com/datasets/akash2sharma/tiny-imagenet/data).
+Combining these datasets ensures balanced representation of faces and objects, reducing bias and improving model performance. The diversity in lighting, orientation, and object types enhances the model's generalizability. Proper preprocessing, like normalization and class balancing, provides a strong foundation for a high-performing classifier. For more details, check their Kaggle pages: LFW Dataset and Tiny ImageNet Dataset.
+![Face Images vs. Non-Face Images](/Graphs/sample_images.jpg)
 
 ## Data Preparation
-For this project, several data preparation techniques were employed to ensure the datasets were ready for model training and evaluation. **Data normalization** was applied to scale RGB pixel intensities to a range of [0, 1], ensuring consistent input for the model and improving convergence during training. **Data augmentation** techniques such as random cropping, horizontal flipping, and rotation were used to artificially increase the size of the dataset and introduce variability, helping the model generalize better to unseen data. To address potential class imbalances, **class balancing** was implemented by oversampling the smaller class or undersampling the larger class as needed. Additionally, **data splitting** was performed to divide the datasets into training, validation, and test sets, ensuring the model was evaluated on data it had not encountered during training. These preparation steps collectively enhanced the quality of the input data, enabling the development of a more robust and accurate classifier.
+For this project, data preparation involved several techniques to ensure readiness for model training and evaluation. **Class balancing** addressed imbalances by oversampling smaller classes or undersampling larger ones. **Data splitting** divided datasets into training, validation, and test sets for proper model evaluation. These steps collectively enhanced input data quality, leading to a more robust and accurate classifier.
+![Data balanced](data_sizes.jpg)
 
 # Exploratory data analysis 
 The modeling section of this project explored three distinct models to classify images into "faces" or "objects." Each model's performance and characteristics were analyzed to understand its behavior and effectiveness for this task.  
+- The project began with a **Decision Tree** model (Model 1), which performed poorly due to overfitting and difficulty handling complex pixel data. A **Random Forest** model (Model 2) improved performance by reducing variance through ensemble learning but still struggled with image data complexity. 
+- A baseline **Convolutional Neural Network (CNN)** (Model 3) significantly outperformed these models by capturing spatial features, though it faced overfitting issues.
+![CNN Model Loss](cnnmodel_loss.jpg)
+![CNN Model Accuracy](cnn_modelacc.jpg)
 
-#### **1. Simple Decision Tree and Random Forest Models**  
-- **Decision Tree**:  
-  A simple decision tree was implemented as an initial model to establish a basic understanding of the classification task.  
-  - **Key Insights**:  
-    - The decision tree performed poorly due to its inability to handle the high-dimensional and complex pixel data effectively.  
-    - Overfitting was a major issue, as the model memorized training data but failed to generalize to new images.  
+- Finally, a **Hyperparameter-Tuned CNN** achieved the best results, with optimized parameters and regularization methods like dropout, leading to higher accuracy, precision, and recall, and better generalization on unseen data.
 
-- **Random Forest**:  
-  A simple random forest model was introduced to improve upon the decision tree by aggregating multiple weak learners.  
-  - **Key Insights**:  
-    - The random forest model showed better performance than the decision tree, leveraging ensemble learning to reduce variance and improve accuracy.  
-    - However, like the decision tree, it struggled with the complexity of image data, indicating a need for feature extraction methods or dimensionality reduction.  
-
-#### **2. Baseline Model (Convolutional Neural Network)**  
-A baseline CNN model was developed to leverage deep learning techniques for feature extraction and classification.  
-- **Key Insights**:  
-  - The CNN significantly outperformed the decision tree and random forest models, capturing spatial and hierarchical features from the image data.  
-  - Overfitting was observed, especially during the later epochs, suggesting a need for regularization methods such as dropout.  
-  - This model set a benchmark for the project, demonstrating the importance of deep learning in handling image classification tasks.  
-
-#### **3. Hyperparameter-Tuned CNN Model**  
-The third model extended the baseline CNN by incorporating hyperparameter tuning to optimize its performance. Techniques such as grid search and random search were used to refine parameters like the learning rate, number of filters, kernel sizes, and dropout rates.  
-- **Key Insights**:  
-  - The hyperparameter-tuned CNN achieved the best performance among all models, with higher accuracy, precision, and recall compared to the baseline CNN.  
-  - Regularization methods like dropout effectively mitigated overfitting, enabling the model to generalize better on unseen data.  
-  - Adjustments to the learning rate improved convergence, and increased filter sizes helped capture more complex features in the images.
-    
 # Evaluation
+The final model, optimized through hyperparameter tuning, achieved a test accuracy of 99.92%. However, this high accuracy may be unreliable due to potential overfitting and the lack of downscaling of face images, suggesting the model might be leveraging size differences rather than meaningful features. Accuracy was the primary evaluation metric, but the near-perfect score indicates overfitting, implying poor generalization to new data. The hyperparameter tuning and model training took 1 hour, 20 minutes, and 10 seconds. Despite efficient resource use, further steps are needed to ensure the model's reliability and generalization.
+![Confusion Matrix of Best Model](confusion_matrix.jpg)
 
 # Conclusionn
+The hyperparameter-tuned model achieved outstanding results, with a test accuracy of 99.92%. The classification report further confirmed this performance, showing perfect precision, recall, and F1-scores of 1.00 for both classes (faces and non-faces). The confusion matrix also reflected this high accuracy, with no misclassifications. These results indicate that the model performs exceptionally well in distinguishing between faces and non-faces, although the high accuracy suggests potential overfitting due to the image size discrepancy between the datasets.
+
 ## Limitations
-## Next Steps
+The project faced several limitations. The significant size difference between face images from the LFW dataset (approximately 8k) and object images from the Tiny ImageNet dataset (around 1.5k) likely contributed to overfitting, as the model might distinguish based on size rather than features. There was also a dataset imbalance, leading to biased performance favoring the overrepresented class. The near-perfect accuracy indicated overfitting, with the model performing well on training data but poorly on new data. Variations in image quality, lighting, and backgrounds affected performance, making the model sensitive to these inconsistencies. Additionally, the current model architecture might not be optimal for distinguishing faces from non-faces, suggesting a need for more advanced feature extraction techniques or different architectures.
+
+## Next Steps:
+To improve the model, the next steps include downscaling face images to match object image sizes for uniformity, applying data augmentation techniques to increase training data diversity, and implementing regularization methods like dropout and L2 regularization to prevent overfitting. Additionally, experimenting with advanced architectures such as deeper CNNs or transfer learning can enhance feature extraction, while using cross-validation will better assess performance and ensure generalization. These steps aim to enhance the model's robustness and accuracy without overfitting.
+
 ## More Information:
-Find the full analysis in the [GoogleColab] or review this [presentation]().
+Find the full analysis in the [Notebook](Facial_Recognition_using_CNN.ipynb) or review this [presentation](FacialRecognitionClassifier.pdf).
 
 ## Repository Structure
 - Graphs
 - README.md
-- .ipynb
-- .pdf
+- Facial_Recognition_using_CNN.ipynb
+- FacialRecognitionClassifier.pdf
 
 ### Author: Adriana Ramirez Franco (aramirezfr20@gmail.com)
