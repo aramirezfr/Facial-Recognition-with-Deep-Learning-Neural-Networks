@@ -17,8 +17,7 @@ The modeling section of this project explored three distinct models to classify 
 - A baseline **Convolutional Neural Network (CNN)** (Model 3) significantly outperformed these models by capturing spatial features, though it faced overfitting issues.
 ![CNN Model Accuracy](/Graphs/cnn_modelacc.jpg)
 
-- Finally, a **Hyperparameter-Tuned CNN** achieved the best results, with optimized parameters and regularization methods like dropout, leading to higher accuracy, precision, and recall, and better generalization on unseen data.
-
+- Finally, a **Hyperparameter-Tuned CNN** achieved the best results, with optimized parameters and regularization methods like dropout, leading to higher accuracy, precision, and recall, and better generalization on unseen data. Resource on['Hyperparameter Tuning'](https://www.geeksforgeeks.org/hyperparameter-tuning/)
 # Evaluation:
 The final model, optimized through hyperparameter tuning, achieved a test accuracy of 99.92%. However, this high accuracy may be unreliable due to potential overfitting and the lack of downscaling of face images, suggesting the model might be leveraging size differences rather than meaningful features. Accuracy was the primary evaluation metric, but the near-perfect score indicates overfitting, implying poor generalization to new data. The hyperparameter tuning and model training took 1 hour, 20 minutes, and 10 seconds. Despite efficient resource use, further steps are needed to ensure the model's reliability and generalization.
 ![Confusion Matrix of Best Model](/Graphs/confusion_matrix.jpg)
